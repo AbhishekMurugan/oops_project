@@ -2,19 +2,21 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
+
 class emr():
     def __init__(self):
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
         self.driver.implicitly_wait(30)
-        #self.driver.get("https://demo.openemr.io/b/openemr")
-        self.driver.get("https://demo.openemr.io/openemr/interface/login/login.php?site=default")
+        self.driver.get("https://demo.openemr.io/b/openemr")
+
     def login(self):
         self.driver.find_element(By.ID, "authUser").send_keys("admin")
         self.driver.find_element(By.ID, "clearPass").send_keys("pass")
         select_lan = Select(self.driver.find_element(By.XPATH, "//select[@name='languageChoice']"))
         select_lan.select_by_visible_text("English (Indian)")
         self.driver.find_element(By.ID, "login-button").click()
+
 
 class Add_User(emr):
     def user(self):
@@ -33,7 +35,7 @@ class Add_User(emr):
         self.driver.switch_to.frame("modalframe")
         self.driver.find_element(By.XPATH, "//input[@value='Confirm Create New Patient']").click()
 
-
+    # expection handling
     def element(self):
         try:
             self.driver.find_element(By.ID, "authUUser").click()
@@ -41,7 +43,10 @@ class Add_User(emr):
         except:
             print("Invalid id")
 
+
 obj = Add_User()
+
+# menu
 while True:
     print("Enter 1 for login")
     print("Enter 2 for select only after logging in")
@@ -56,16 +61,3 @@ while True:
         obj.element()
     elif choice == 4:
         quit()
-
-
-
-
-
-
-
-
-
-
-
-
-
