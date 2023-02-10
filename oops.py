@@ -17,6 +17,8 @@ class emr():
         select_lan.select_by_visible_text("English (Indian)")
         self.driver.find_element(By.ID, "login-button").click()
 
+    def user(self):
+        return 0
 
 class Add_User(emr):
     def user(self):
